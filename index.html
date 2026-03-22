@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PureClean - Schoon & Stralend</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Poppins:wght@500;600;700;800;900&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -114,6 +114,14 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             letter-spacing: -0.5px;
+            cursor: pointer;
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 28px;
+            color: var(--teal);
+            cursor: pointer;
         }
 
         nav ul {
@@ -311,8 +319,8 @@
         .ba-slider-container {
             position: relative;
             width: 100%;
-            max-width: 900px;
-            height: 450px;
+            max-width: 600px;
+            height: 300px;
             margin: 0 auto;
             border-radius: var(--radius-md);
             overflow: hidden;
@@ -375,7 +383,7 @@
             -webkit-appearance: none;
             appearance: none;
             width: 4px;
-            height: 450px;
+            height: 300px;
             background: white;
             cursor: ew-resize;
         }
@@ -522,6 +530,17 @@
         footer h3 {
             color: var(--primary-white);
         }
+        
+        .footer-logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--primary-white);
+            letter-spacing: -0.5px;
+            cursor: pointer;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
 
         .social-links a {
             display: inline-flex;
@@ -540,6 +559,13 @@
         .social-links a:hover {
             background: var(--teal-light);
             transform: translateY(-3px);
+        }
+        
+        .fyxo-text {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 900;
+            font-size: 1.1em;
+            color: var(--primary-white);
         }
 
         /* Floating Elements */
@@ -612,7 +638,36 @@
             .timeline-step { width: 100%; padding-left: 70px; padding-right: 25px; }
             .timeline-step:nth-child(odd), .timeline-step:nth-child(even) { left: 0; text-align: left; }
             .timeline-step::after, .timeline-step:nth-child(even):after { left: 21px; }
-            nav ul { display: none; }
+            
+            /* Burger Menu Additions */
+            .hamburger { display: block; }
+            header .btn { display: none; }
+            nav ul {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                flex-direction: column;
+                align-items: center;
+                padding: 0;
+                margin: 0;
+                box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+                display: flex;
+            }
+            nav ul.nav-active {
+                max-height: 300px;
+                padding: 20px 0;
+            }
+            nav ul li {
+                margin: 12px 0;
+            }
+
             .cookie-banner { flex-direction: column; text-align: center; gap: 15px; }
             .ba-slider-container { height: 300px; }
             .ba-slider-input::-webkit-slider-thumb { height: 300px; }
@@ -622,15 +677,18 @@
 <body>
 
     <header>
-        <div class="logo">PureClean</div>
+        <div class="logo" onclick="showPage('home')">PureClean</div>
         <nav>
-            <ul>
+            <ul id="nav-menu">
                 <li><a onclick="showPage('home')">Home</a></li>
                 <li><a onclick="showPage('diensten')">Onze diensten</a></li>
                 <li><a onclick="showPage('offertes')">Offertes</a></li>
             </ul>
         </nav>
         <button class="btn" onclick="showPage('offertes')" style="padding: 10px 24px; font-size: 0.9rem;">Offerte aanvragen</button>
+        <div class="hamburger" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
     </header>
 
     <div id="home" class="page-section active" style="padding-top: 0;">
@@ -893,6 +951,7 @@
 
     <footer>
         <div class="container" style="padding: 20px;">
+            <div class="footer-logo" onclick="showPage('home')">PureClean</div>
             <h3 style="margin-bottom: 15px;">Schoon begint met een goed gesprek!</h3>
             <p style="max-width: 500px; margin: 0 auto 30px;">Wacht niet te lang! Vraag vandaag nog een offerte aan en ontdek wat wij voor u kunnen betekenen.</p>
             
@@ -906,7 +965,8 @@
                 <a onclick="showPage('legal'); setTimeout(() => document.getElementById('privacy').scrollIntoView(), 100);" style="cursor: pointer;">Privacyverklaring</a>
                 <a onclick="showPage('legal'); setTimeout(() => document.getElementById('impressum').scrollIntoView(), 100);" style="cursor: pointer;">Impressum</a>
             </div>
-            <p style="font-size: 0.8em;">&copy; 2026 PureClean. Alle rechten voorbehouden.</p>
+            <p style="font-size: 0.8em; margin-bottom: 10px;">&copy; 2026 PureClean. Alle rechten voorbehouden.</p>
+            <p style="font-size: 0.8em;">Made by <span class="fyxo-text">FYXO</span></p>
         </div>
     </footer>
 
@@ -925,6 +985,10 @@
     </div>
 
     <script>
+        function toggleMenu() {
+            document.getElementById('nav-menu').classList.toggle('nav-active');
+        }
+
         function showPage(pageId) {
             document.querySelectorAll('.page-section').forEach(section => {
                 section.classList.remove('active');
@@ -932,6 +996,12 @@
             document.getElementById(pageId).classList.add('active');
             window.scrollTo({ top: 0, behavior: 'smooth' });
             setTimeout(handleScrollAnimations, 100);
+
+            // Hide the mobile menu once a link is clicked
+            const navMenu = document.getElementById('nav-menu');
+            if(navMenu && navMenu.classList.contains('nav-active')) {
+                navMenu.classList.remove('nav-active');
+            }
         }
 
         const observerOptions = {
