@@ -315,7 +315,7 @@
             border: 4px solid var(--primary-white);
         }
 
-        /* Before/After Slider */
+        /* Before/After Slider (Updated to support clipPath) */
         .ba-slider-container {
             position: relative;
             width: 100%;
@@ -344,9 +344,9 @@
         }
 
         .ba-img-foreground {
-            width: 50%; 
+            width: 100%; 
             z-index: 2;
-            overflow: hidden;
+            clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
         }
 
         .ba-badge {
@@ -384,14 +384,13 @@
             appearance: none;
             width: 4px;
             height: 300px;
-            background: white;
+            background: transparent; /* Verberg standaard thumb aangezien we onze eigen knop gebruiken */
             cursor: ew-resize;
         }
 
         .ba-slider-button {
             position: absolute;
             top: 50%;
-            left: 50%;
             transform: translate(-50%, -50%);
             width: 40px;
             height: 40px;
@@ -519,16 +518,48 @@
             cursor: pointer;
         }
 
-        /* Footer */
+        /* Footer (Updated for Grid Layout) */
         footer {
             background-color: var(--text-dark);
             color: rgba(255,255,255,0.7);
             padding: 60px 20px 30px;
-            text-align: center;
         }
 
-        footer h3 {
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col {
+            flex: 1;
+            min-width: 250px;
+            text-align: left;
+        }
+
+        .footer-col h4 {
             color: var(--primary-white);
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .footer-links-col {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
         
         .footer-logo {
@@ -539,7 +570,7 @@
             letter-spacing: -0.5px;
             cursor: pointer;
             display: inline-block;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .social-links a {
@@ -551,7 +582,7 @@
             background: rgba(255,255,255,0.1);
             border-radius: 50%;
             color: var(--primary-white);
-            margin: 0 10px;
+            margin: 0 10px 0 0;
             font-size: 1.2rem;
             transition: all 0.3s ease;
         }
@@ -616,7 +647,7 @@
             transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
         }
         
-        .reveal.active {
+        .reveal.active { /* Note: retained active class name to prevent CSS breakage, but triggered properly via JS */
             opacity: 1;
             transform: translateY(0);
         }
@@ -632,14 +663,23 @@
         }
 
         @media (max-width: 768px) {
-            .values-grid, .services-grid { grid-template-columns: 1fr; }
+            .values-grid { grid-template-columns: 1fr; }
+            
+            /* Mobile 2x2 grid adjustments for diensten */
+            .services-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+            .service-card { padding: 15px 10px; }
+            .service-card h3 { font-size: 1rem; margin-bottom: 5px; }
+            .service-card p { font-size: 0.8rem; margin-bottom: 10px; }
+            .service-card .card-img { margin: -15px -10px 15px -10px; width: calc(100% + 20px); height: 120px; }
+            .service-card .icon-wrapper { width: 45px; height: 45px; font-size: 18px; margin-top: -35px; margin-bottom: 10px; border-width: 3px; }
+
             .hero h1 { font-size: 2.5rem; }
             .timeline::after { left: 31px; }
             .timeline-step { width: 100%; padding-left: 70px; padding-right: 25px; }
             .timeline-step:nth-child(odd), .timeline-step:nth-child(even) { left: 0; text-align: left; }
             .timeline-step::after, .timeline-step:nth-child(even):after { left: 21px; }
             
-            /* Burger Menu Additions */
+            /* Burger Menu */
             .hamburger { display: block; }
             header .btn { display: none; }
             nav ul {
@@ -671,6 +711,13 @@
             .cookie-banner { flex-direction: column; text-align: center; gap: 15px; }
             .ba-slider-container { height: 300px; }
             .ba-slider-input::-webkit-slider-thumb { height: 300px; }
+            
+            /* Mobile footer adjustments */
+            .footer-content { flex-direction: column; text-align: center; align-items: center; gap: 30px; }
+            .footer-col { text-align: center; }
+            .social-links { justify-content: center; }
+            .social-links a { margin: 0 5px; }
+            .footer-bottom { flex-direction: column; gap: 15px; }
         }
     </style>
 </head>
@@ -746,12 +793,12 @@
                 <div class="ba-img-background">
                     <img src="na.jpg" alt="Na reiniging">
                 </div>
-                <div class="ba-img-foreground" id="ba-foreground">
+                <div class="ba-img-foreground img-before" id="ba-foreground">
                     <img src="voor.jpg" alt="Voor reiniging">
                     <span class="ba-badge ba-badge-voor">Voor</span>
                 </div>
                 <input type="range" min="0" max="100" value="50" class="ba-slider-input" id="ba-slider">
-                <div class="ba-slider-button" id="ba-slider-button">
+                <div class="ba-slider-button" id="ba-slider-line" style="left: 50%;">
                     <i class="fas fa-code"></i>
                 </div>
             </div>
@@ -951,22 +998,35 @@
 
     <footer>
         <div class="container" style="padding: 20px;">
-            <div class="footer-logo" onclick="showPage('home')">PureClean</div>
-            <h3 style="margin-bottom: 15px;">Schoon begint met een goed gesprek!</h3>
-            <p style="max-width: 500px; margin: 0 auto 30px;">Wacht niet te lang! Vraag vandaag nog een offerte aan en ontdek wat wij voor u kunnen betekenen.</p>
-            
-            <div class="social-links" style="margin-bottom: 30px;">
-                <a href="https://www.instagram.com/pure_clean.nl/" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.facebook.com/people/Pureclean/61574962420022/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <div class="footer-content">
+                <div class="footer-col">
+                    <div class="footer-logo" onclick="showPage('home')">PureClean</div>
+                    <h3 style="margin-bottom: 15px;">Schoon begint met een goed gesprek!</h3>
+                    <p style="max-width: 300px; margin: 0;">Wacht niet te lang! Vraag vandaag nog een offerte aan en ontdek wat wij voor u kunnen betekenen.</p>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Handige Links</h4>
+                    <div class="footer-links-col">
+                        <a onclick="showPage('legal'); setTimeout(() => document.getElementById('voorwaarden').scrollIntoView(), 100);" style="cursor: pointer;">Algemene voorwaarden</a>
+                        <a onclick="showPage('legal'); setTimeout(() => document.getElementById('privacy').scrollIntoView(), 100);" style="cursor: pointer;">Privacyverklaring</a>
+                        <a onclick="showPage('legal'); setTimeout(() => document.getElementById('impressum').scrollIntoView(), 100);" style="cursor: pointer;">Impressum</a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Volg Ons</h4>
+                    <div class="social-links" style="margin-bottom: 20px;">
+                        <a href="https://www.instagram.com/pure_clean.nl/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/people/Pureclean/61574962420022/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    </div>
+                </div>
             </div>
-            
-            <div style="font-size: 0.9em; margin-bottom: 20px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
-                <a onclick="showPage('legal'); setTimeout(() => document.getElementById('voorwaarden').scrollIntoView(), 100);" style="cursor: pointer;">Algemene voorwaarden</a>
-                <a onclick="showPage('legal'); setTimeout(() => document.getElementById('privacy').scrollIntoView(), 100);" style="cursor: pointer;">Privacyverklaring</a>
-                <a onclick="showPage('legal'); setTimeout(() => document.getElementById('impressum').scrollIntoView(), 100);" style="cursor: pointer;">Impressum</a>
+
+            <div class="footer-bottom">
+                <p style="font-size: 0.8em; margin: 0;">&copy; 2026 PureClean. Alle rechten voorbehouden.</p>
+                <p style="font-size: 0.8em; margin: 0;">Made by <a href="https://www.fyxo.online/" target="_blank" style="text-decoration: none;"><span class="fyxo-text">FYXO</span></a></p>
             </div>
-            <p style="font-size: 0.8em; margin-bottom: 10px;">&copy; 2026 PureClean. Alle rechten voorbehouden.</p>
-            <p style="font-size: 0.8em;">Made by <span class="fyxo-text">FYXO</span></p>
         </div>
     </footer>
 
@@ -995,7 +1055,6 @@
             });
             document.getElementById(pageId).classList.add('active');
             window.scrollTo({ top: 0, behavior: 'smooth' });
-            setTimeout(handleScrollAnimations, 100);
 
             // Hide the mobile menu once a link is clicked
             const navMenu = document.getElementById('nav-menu');
@@ -1004,43 +1063,43 @@
             }
         }
 
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.15
-        };
-
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        function handleScrollAnimations() {
-            document.querySelectorAll('.reveal:not(.active)').forEach(el => {
-                observer.observe(el);
-            });
-        }
-
         window.addEventListener('DOMContentLoaded', () => {
-            handleScrollAnimations();
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            const animatedElements = document.querySelectorAll('.reveal:not(.active)');
+            animatedElements.forEach(el => observer.observe(el));
+
             setTimeout(() => {
                 document.getElementById('cookieBanner').classList.add('active');
             }, 1000);
-        });
 
-        /* Before/After Slider Logic */
-        const baSlider = document.getElementById('ba-slider');
-        const baForeground = document.getElementById('ba-foreground');
-        const baSliderBtn = document.getElementById('ba-slider-button');
+            // --- Before & After Slider Functionaliteit ---
+            const slider = document.getElementById('ba-slider');
+            const beforeImg = document.querySelector('.img-before');
+            const sliderLine = document.getElementById('ba-slider-line');
 
-        baSlider.addEventListener('input', (e) => {
-            const sliderPos = e.target.value;
-            baForeground.style.width = `${sliderPos}%`;
-            baSliderBtn.style.left = `${sliderPos}%`;
+            if(slider && beforeImg && sliderLine) {
+                slider.addEventListener('input', (e) => {
+                    const sliderValue = e.target.value;
+                    // Clip de bovenste (voor) foto op basis van de slider
+                    beforeImg.style.clipPath = `polygon(0 0, ${sliderValue}% 0, ${sliderValue}% 100%, 0 100%)`;
+                    // Verplaats de witte lijn met het knopje
+                    sliderLine.style.left = `${sliderValue}%`;
+                });
+            }
         });
     </script>
 </body>
