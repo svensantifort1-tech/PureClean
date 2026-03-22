@@ -14,9 +14,9 @@
         :root {
             --primary-white: #FFFFFF;
             --bg-light: #F8F9FA;
-            --teal: #0F4C5C; /* Deep, professional teal */
+            --teal: #0F4C5C;
             --teal-light: #4DB6AC;
-            --accent-gold: #C6A780; /* Premium earthy tan/gold */
+            --accent-gold: #C6A780;
             --text-dark: #1A1A1A;
             --text-muted: #666666;
             --shadow-sm: 0 4px 6px rgba(0,0,0,0.05);
@@ -63,7 +63,7 @@
             color: var(--primary-white);
             padding: 14px 32px;
             border: none;
-            border-radius: 50px; /* Pill shape for modern look */
+            border-radius: 50px;
             font-family: 'Poppins', sans-serif;
             font-weight: 600;
             font-size: 1rem;
@@ -153,7 +153,7 @@
         /* Container & Sections */
         .page-section {
             display: none;
-            padding-top: 80px; /* Account for fixed header */
+            padding-top: 80px;
             min-height: 100vh;
         }
 
@@ -195,7 +195,7 @@
                         url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
             color: var(--primary-white);
             padding: 0 20px;
-            margin-top: -80px; /* Pull up under header */
+            margin-top: -80px;
         }
 
         .hero h1 {
@@ -219,13 +219,20 @@
             justify-content: center;
         }
 
-        /* Modern Grid Cards */
-        .grid-container {
+        /* Grids */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* Forces 4 items in a row */
+            gap: 30px;
+        }
+
+        .services-grid, .contact-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 40px;
         }
 
+        /* Cards */
         .card {
             background: var(--primary-white);
             border-radius: var(--radius-md);
@@ -235,6 +242,7 @@
             position: relative;
             overflow: hidden;
             border: 1px solid rgba(0,0,0,0.03);
+            height: 100%;
         }
 
         .card::before {
@@ -271,11 +279,26 @@
             color: var(--teal);
             font-size: 28px;
             transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
         }
 
         .card:hover .icon-wrapper {
             background: var(--teal);
             color: var(--primary-white);
+        }
+
+        /* Images in Service Cards */
+        .card-img {
+            width: calc(100% + 60px);
+            margin: -40px -30px 20px -30px; /* Pulls image to edges of card padding */
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .service-card .icon-wrapper {
+            margin-top: -60px; /* Overlaps the image beautifully */
+            border: 4px solid var(--primary-white);
         }
 
         /* Timeline Redesign */
@@ -474,19 +497,24 @@
             transform: translateY(0);
         }
 
-        /* Delays for staggered grid animations */
         .delay-1 { transition-delay: 0.1s; }
         .delay-2 { transition-delay: 0.2s; }
         .delay-3 { transition-delay: 0.3s; }
         .delay-4 { transition-delay: 0.4s; }
 
+        /* Media Queries for Responsiveness */
+        @media (max-width: 992px) {
+            .values-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
         @media (max-width: 768px) {
+            .values-grid { grid-template-columns: 1fr; }
             .hero h1 { font-size: 2.5rem; }
             .timeline::after { left: 31px; }
             .timeline-step { width: 100%; padding-left: 70px; padding-right: 25px; }
             .timeline-step:nth-child(odd), .timeline-step:nth-child(even) { left: 0; text-align: left; }
             .timeline-step::after, .timeline-step:nth-child(even):after { left: 21px; }
-            nav ul { display: none; /* In a real app, add a hamburger menu here */ }
+            nav ul { display: none; }
             .cookie-banner { flex-direction: column; text-align: center; gap: 15px; }
         }
     </style>
@@ -500,7 +528,7 @@
                 <li><a onclick="showPage('home')">Home</a></li>
                 <li><a onclick="showPage('diensten')">Onze diensten</a></li>
                 <li><a onclick="showPage('offertes')">Offertes</a></li>
-                <li><a onclick="showPage('contact')">Contact</a></li>
+                <li><a onclick="scrollToContact()">Contact</a></li>
             </ul>
         </nav>
         <button class="btn" onclick="showPage('offertes')" style="padding: 10px 24px; font-size: 0.9rem;">Offerte aanvragen</button>
@@ -529,7 +557,7 @@
                 <p>Wij geloven erin dat schoon meer is dan alleen netjes. Het gaat om een frisse start, een verzorgde uitstraling en een gezonde omgeving - thuis en op het werk.</p>
             </div>
             
-            <div class="grid-container">
+            <div class="values-grid">
                 <div class="card reveal delay-1">
                     <div class="icon-wrapper"><i class="fas fa-handshake"></i></div>
                     <h4>Betrouwbaarheid</h4>
@@ -583,6 +611,29 @@
                     </div>
                 </div>
             </div>
+
+            <div id="home-contact-section" class="section-header reveal" style="margin-top: 100px; padding-top: 60px;">
+                <h2>Contact</h2>
+                <p>Heeft u vragen, wilt u meer informatie of direct een vrijblijvende offerte aanvragen? Neem gerust contact met ons op - we staan voor u klaar! Bij PureClean houden we van korte lijnen en duidelijke communicatie.</p>
+            </div>
+            
+            <div class="contact-grid">
+                <div class="card reveal delay-1" style="text-align: center;">
+                    <div class="icon-wrapper" style="margin: 0 auto 20px;"><i class="fas fa-phone"></i></div>
+                    <h3>Bel Ons</h3>
+                    <p style="font-size: 1.2rem; color: var(--text-dark); font-weight: 500;">06-44310456</p>
+                </div>
+                <div class="card reveal delay-2" style="text-align: center;">
+                    <div class="icon-wrapper" style="margin: 0 auto 20px;"><i class="fas fa-envelope"></i></div>
+                    <h3>E-mail</h3>
+                    <p style="font-size: 1.1rem; color: var(--text-dark); font-weight: 500;">purecleanreiniging@gmail.com</p>
+                </div>
+                <div class="card reveal delay-3" style="text-align: center;">
+                    <div class="icon-wrapper" style="margin: 0 auto 20px;"><i class="fas fa-map-marker-alt"></i></div>
+                    <h3>Werkgebied</h3>
+                    <p style="font-size: 1.1rem; color: var(--text-dark); font-weight: 500;">Zuid-Holland & Zeeland</p>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -593,26 +644,33 @@
                 <p>Of het nu gaat om maandelijkse schoonmaak, periodiek onderhoud of een eenmalige dieptereiniging - wij staan klaar om het werk uit handen te nemen.</p>
             </div>
             
-            <div class="grid-container">
-                <div class="card reveal delay-1">
+            <div class="services-grid">
+                <div class="card service-card reveal delay-1">
+                    <img src="https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?auto=format&fit=crop&w=600&q=80" alt="Oprit reiniging" class="card-img">
                     <div class="icon-wrapper"><i class="fas fa-road"></i></div>
                     <h3>Oprit reiniging</h3>
                     <p>Een schone en verzorgde oprit is het visitekaartje van uw woning of bedrijfspand. Wij zorgen ervoor dat uw oprit er weer als nieuw uitziet-vrij van groene aanslag, vuil, olie- en bandensporen.</p>
                     <p style="color: var(--teal); font-weight: 500; font-size: 0.9rem;">Vanaf €3,50 per m²</p>
                 </div>
-                <div class="card reveal delay-2">
+                
+                <div class="card service-card reveal delay-2">
+                    <img src="https://images.unsplash.com/photo-1560920452-aaab3e6cce21?auto=format&fit=crop&w=600&q=80" alt="Terras reiniging" class="card-img">
                     <div class="icon-wrapper"><i class="fas fa-layer-group"></i></div>
                     <h3>Terras reiniging</h3>
                     <p>Genieten van een schoon en fris terras? Wij zorgen ervoor dat uw terras er weer piekfijn uitziet. Vuil, mos, groene aanslag of verkleuring? Wij pakken het grondig en veilig aan.</p>
                     <p style="color: var(--teal); font-weight: 500; font-size: 0.9rem;">Vanaf €3,50 per m²</p>
                 </div>
-                <div class="card reveal delay-3">
+                
+                <div class="card service-card reveal delay-3">
+                    <img src="https://images.unsplash.com/photo-1517581177682-a085bb7ffb15?auto=format&fit=crop&w=600&q=80" alt="Gevel reiniging" class="card-img">
                     <div class="icon-wrapper"><i class="fas fa-building"></i></div>
                     <h3>Gevel reiniging</h3>
                     <p>Een schone gevel beschermt de waarde van uw pand. Wij zijn gespecialiseerd in professionele gevelreiniging, zodat uw woning er weer fris, representatief en verzorgd uitziet.</p>
                     <p style="color: var(--teal); font-weight: 500; font-size: 0.9rem;">Vanaf €3,50 per m²</p>
                 </div>
-                <div class="card reveal delay-4">
+                
+                <div class="card service-card reveal delay-4">
+                    <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=600&q=80" alt="Glas reiniging" class="card-img">
                     <div class="icon-wrapper"><i class="fas fa-home"></i></div>
                     <h3>Glas reiniging</h3>
                     <p>Een schone overkapping of serre zorgt voor een helder uitzicht. Wij zorgen voor een grondige reiniging, van het verwijderen van vuil tot het laten glanzen van het glas met veilige technieken.</p>
@@ -694,33 +752,6 @@
         </div>
     </div>
 
-    <div id="contact" class="page-section">
-        <div class="container">
-            <div class="section-header reveal">
-                <h2>Contact</h2>
-                <p>Heeft u vragen of wilt u meer informatie? Bij PureClean houden we van korte lijnen en duidelijke communicatie. Neem gerust contact met ons op.</p>
-            </div>
-            
-            <div class="grid-container">
-                <div class="card reveal delay-1" style="text-align: center;">
-                    <div class="icon-wrapper" style="margin: 0 auto 20px;"><i class="fas fa-phone"></i></div>
-                    <h3>Bel Ons</h3>
-                    <p style="font-size: 1.2rem; color: var(--text-dark); font-weight: 500;">06-44310456</p>
-                </div>
-                <div class="card reveal delay-2" style="text-align: center;">
-                    <div class="icon-wrapper" style="margin: 0 auto 20px;"><i class="fas fa-envelope"></i></div>
-                    <h3>E-mail</h3>
-                    <p style="font-size: 1.1rem; color: var(--text-dark); font-weight: 500;">purecleanreiniging@gmail.com</p>
-                </div>
-                <div class="card reveal delay-3" style="text-align: center;">
-                    <div class="icon-wrapper" style="margin: 0 auto 20px;"><i class="fas fa-map-marker-alt"></i></div>
-                    <h3>Werkgebied</h3>
-                    <p style="font-size: 1.1rem; color: var(--text-dark); font-weight: 500;">Zuid-Holland & Zeeland</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div id="legal" class="page-section">
         <div class="container" style="max-width: 800px; background: var(--primary-white); padding: 50px; border-radius: 12px; margin-bottom: 50px;">
             <div class="reveal">
@@ -786,6 +817,14 @@
             
             // Re-trigger animations for the new page
             setTimeout(handleScrollAnimations, 100);
+        }
+
+        // Special function for Contact link in nav
+        function scrollToContact() {
+            showPage('home');
+            setTimeout(() => {
+                document.getElementById('home-contact-section').scrollIntoView({ behavior: 'smooth' });
+            }, 300);
         }
 
         // Scroll Animation Logic using IntersectionObserver
