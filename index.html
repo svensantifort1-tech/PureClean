@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PureClean | Schoon & Stralend, Zoals het hoort</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ================= CSS VARIABLES ================= */
+        :root {
+            --primary-teal: #4DB6AC;
+            --primary-teal-dark: #3a8a82;
+            --accent-slate: #78909C;
+            --accent-slate-dark: #546e7a;
+            --accent-tan: #C6A780;
+            --accent-tan-dark: #a88d6c;
+            --bg-mint: #E0F2F1;
+            --pure-white: #FFFFFF;
+            --text-dark: #2c3e50;
+            --text-light: #5f7380;
+            --border-light: #e2e8f0;
+        }
+
+        /* ================= GLOBAL STYLES ================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: var(--pure-white);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--accent-slate-dark);
+            line-height: 1.2;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s ease;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-teal-dark);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.125rem;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-inline: auto;
+        }
+
+        section {
+            padding: 5rem 0;
+        }
+
+        /* ================= BUTTONS ================= */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 28px;
+            border-radius: 6px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-teal);
+            color: var(--pure-white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-teal-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: var(--accent-tan);
+            color: var(--pure-white);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--accent-tan-dark);
+            transform: translateY(-2px);
+        }
+
+        /* ================= HEADER ================= */
+        header {
+            position: sticky;
+            top: 0;
+            background-color: var(--pure-white);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--primary-teal), var(--accent-slate));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            color: var(--accent-slate-dark);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-teal);
+        }
+
+        /* ================= HERO SECTION ================= */
+        .hero {
+            background: linear-gradient(135deg, var(--bg-mint) 0%, rgba(224, 242, 241, 0.4) 100%);
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            color: var(--primary-teal-dark);
+            margin-bottom: 1rem;
+        }
+
+        .hero-text p {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 15px;
+        }
+
+        .hero-image {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* ================= VALUES SECTION ================= */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .value-card {
+            background: var(--pure-white);
+            padding: 30px 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-light);
+            transition: transform 0.3s ease;
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-teal);
+        }
+
+        .value-icon {
+            font-size: 2.5rem;
+            color: var(--primary-teal);
+            margin-bottom: 15px;
+        }
+
+        .value-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .value-card p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+        }
+
+        .sustainability-highlight {
+            border-top: 4px solid var(--primary-teal);
+            background-color: var(--bg-mint);
+        }
+
+        /* ================= SERVICES SECTION ================= */
+        .services {
+            background-color: #f8fafc;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--pure-white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .service-img {
+            height: 200px;
+            background-color: var(--accent-slate);
+            /* Placeholder backgrounds */
+            background-image: url('https://images.unsplash.com/photo-1585128719715-46776b56a0fb?auto=format&fit=crop&q=80&w=600');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .service-card:nth-child(2) .service-img { background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=600'); }
+        .service-card:nth-child(3) .service-img { background-image: url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=600'); }
+        .service-card:nth-child(4) .service-img { background-image: url('https://images.unsplash.com/photo-1615874623868-96f30f9d9241?auto=format&fit=crop&q=80&w=600'); }
+
+        .service-content {
+            padding: 25px;
+        }
+
+        .service-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .frequency-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .tag {
+            background-color: var(--bg-mint);
+            color: var(--primary-teal-dark);
+            font-size: 0.8rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        /* ================= PROCESS SECTION ================= */
+        .process-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            position: relative;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        /* The horizontal line behind steps */
+        .process-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--bg-mint);
+            z-index: 0;
+        }
+
+        .process-step {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+            background: var(--pure-white);
+            padding: 10px;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary-teal);
+            color: var(--pure-white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            margin: 0 auto 15px;
+            border: 4px solid var(--pure-white);
+            box-shadow: 0 0 0 3px var(--bg-mint);
+        }
+
+        .process-step h4 {
+            margin-bottom: 8px;
+            color: var(--accent-slate-dark);
+        }
+
+        .process-step p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* ================= SOCIAL PROOF & INSTA ================= */
+        .social-proof {
+            background-color: var(--bg-mint);
+        }
+
+        .testimonial {
+            background: var(--pure-white);
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .testimonial i {
+            font-size: 2rem;
+            color: var(--accent-tan);
+            margin-bottom: 20px;
+        }
+
+        .testimonial p {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .insta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .insta-post {
+            background-color: #ddd;
+            aspect-ratio: 1/1;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-slate);
+            font-size: 2rem;
+            background-image: url('https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&q=80&w=400');
+            background-size: cover;
+            background-position: center;
+        }
+        .insta-post:nth-child(2) { background-image: url('https://images.unsplash.com/photo-1621293954908-907159247fc8?auto=format&fit=crop&q=80&w=400'); }
+        .insta-post:nth-child(3) { background-image: url('https://images.unsplash.com/photo-1599839619722-39751411ea63?auto=format&fit=crop&q=80&w=400'); }
+        .insta-post:nth-child(4) { background-image: url('https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?auto=format&fit=crop&q=80&w=400'); }
+
+        /* ================= LEAD GEN FORM ================= */
+        .offerte-form-wrapper {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--pure-white);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-light);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-light);
+            border-radius: 6px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-teal);
+            box-shadow: 0 0 0 3px rgba(77, 182, 172, 0.2);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* ================= FOOTER ================= */
+        footer {
+            background-color: var(--accent-slate-dark);
+            color: var(--pure-white);
+            padding: 4rem 0 2rem;
+            text-align: center;
+        }
+
+        .footer-cta {
+            margin-bottom: 3rem;
+        }
+
+        .footer-cta h2 {
+            color: var(--pure-white);
+            margin-bottom: 1rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .social-links a {
+            color: var(--pure-white);
+            font-size: 1.5rem;
+            margin: 0 10px;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary-teal);
+        }
+
+        .legal-links a {
+            color: #cbd5e1;
+            font-size: 0.875rem;
+            margin: 0 10px;
+        }
+
+        .legal-links a:hover {
+            color: var(--pure-white);
+        }
+
+        /* ================= FLOATING WHATSAPP ================= */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            color: #fff;
+        }
+
+        /* ================= COOKIE BANNER ================= */
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--text-dark);
+            color: var(--pure-white);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 9999;
+            transform: translateY(100%);
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .cookie-banner.show {
+            transform: translateY(0);
+        }
+
+        .cookie-banner p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        .cookie-btns {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* ================= RESPONSIVE DESIGN ================= */
+        @media (max-width: 992px) {
+            .hero-content { grid-template-columns: 1fr; text-align: center; }
+            .hero-btns { justify-content: center; }
+            .process-wrapper::before { display: none; }
+            .process-wrapper { flex-direction: column; align-items: center; }
+            .process-step { width: 100%; max-width: 300px; margin-bottom: 20px; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; /* In a real app, add a hamburger menu here */ }
+            .hero-text h1 { font-size: 2.5rem; }
+            .section-title { font-size: 2rem; }
+            .cookie-banner { flex-direction: column; text-align: center; gap: 15px; }
+            .whatsapp-float { bottom: 20px; right: 20px; width: 50px; height: 50px; font-size: 25px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-wrapper">
+            <a href="#" class="logo">
+                <i class="fa-solid fa-sparkles" style="color: var(--primary-teal);"></i> PureClean
+            </a>
+            <nav class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#diensten">Onze Diensten</a>
+                <a href="#aanpak">Werkwijze</a>
+                <a href="#reviews">Portfolio</a>
+            </nav>
+            <a href="#offerte" class="btn btn-secondary">Offerte Aanvragen</a>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1>Uw partner in schoonmaak!</h1>
+                <p><strong>Schoon & Stralend, Zoals het hoort.</strong> Wij zorgen voor een stralend resultaat tot in de kleinste hoekjes. Specialist in opritten, gevels en terrassen.</p>
+                <div class="hero-btns">
+                    <a href="#diensten" class="btn btn-primary">Ontdek onze diensten</a>
+                    <a href="#offerte" class="btn btn-secondary">Direct een offerte</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Schoon en stralend huis met oprit">
+            </div>
+        </div>
+    </section>
+
+    <section id="waarden">
+        <div class="container">
+            <h2 class="section-title">Waar wij voor staan</h2>
+            <p class="section-subtitle">Schoon is meer dan alleen netjes. Het is een frisse start en een verzorgde uitstraling.</p>
+            
+            <div class="values-grid">
+                <div class="value-card">
+                    <i class="fa-solid fa-handshake value-icon"></i>
+                    <h3>Betrouwbaarheid</h3>
+                    <p>Afspraken zijn er om na te komen. U kunt op ons rekenen.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fa-solid fa-gem value-icon"></i>
+                    <h3>Kwaliteit</h3>
+                    <p>We leveren consequent hoogwaardig werk, met zorg en precisie.</p>
+                </div>
+                <div class="value-card sustainability-highlight">
+                    <i class="fa-solid fa-leaf value-icon" style="color: #2e7d32;"></i>
+                    <h3>Duurzaamheid</h3>
+                    <p>We kiezen waar mogelijk voor milieuvriendelijke producten.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fa-solid fa-arrows-turn-to-dots value-icon"></i>
+                    <h3>Flexibiliteit</h3>
+                    <p>Ieder pand is anders. Maatwerk afgestemd op uw wensen.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fa-solid fa-user-check value-icon"></i>
+                    <h3>Persoonlijke Service</h3>
+                    <p>Een vast aanspreekpunt voor heldere communicatie.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services" id="diensten">
+        <div class="container">
+            <h2 class="section-title">Onze Diensten</h2>
+            <p class="section-subtitle">Van een eenmalige dieptereiniging tot periodiek onderhoud, wij staan voor u klaar.</p>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-img"></div>
+                    <div class="service-content">
+                        <h3>Opritten</h3>
+                        <p>Verwijderen van aanslag, onkruid en vuil voor een representatieve en veilige oprit.</p>
+                        <div class="frequency-tags">
+                            <span class="tag">Maandelijks</span>
+                            <span class="tag">Periodiek</span>
+                            <span class="tag">Eenmalig</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-img"></div>
+                    <div class="service-content">
+                        <h3>Gevels</h3>
+                        <p>Zachte maar effectieve reiniging om uw muren hun originele, frisse kleur terug te geven.</p>
+                        <div class="frequency-tags">
+                            <span class="tag">Periodiek</span>
+                            <span class="tag">Eenmalig</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-img"></div>
+                    <div class="service-content">
+                        <h3>Terrassen</h3>
+                        <p>Geniet optimaal van het buitenleven met een diep gereinigd en vlekvrij terras.</p>
+                        <div class="frequency-tags">
+                            <span class="tag">Maandelijks</span>
+                            <span class="tag">Eenmalig</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-img"></div>
+                    <div class="service-content">
+                        <h3>Tegels (Rondom Huis)</h3>
+                        <p>Behoud de levensduur van uw tegels met onze gespecialiseerde reinigingsmethodes.</p>
+                        <div class="frequency-tags">
+                            <span class="tag">Periodiek onderhoud</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="aanpak">
+        <div class="container">
+            <h2 class="section-title">Hoe wij te werk gaan</h2>
+            <p class="section-subtitle">Een gestructureerde en transparante aanpak. Zo weet u altijd waar u aan toe bent.</p>
+            
+            <div class="process-wrapper">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h4>Kennismaking</h4>
+                    <p>Persoonlijk gesprek en grondige inventarisatie van locatie en wensen.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h4>Offerte</h4>
+                    <p>Een duidelijke, op maat gemaakte offerte zonder verrassingen achteraf.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h4>Uitvoering</h4>
+                    <p>Efficiënt werken met professionele middelen en eco-producten.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h4>Controle</h4>
+                    <p>Regelmatige evaluatie van het resultaat; uw tevredenheid centraal.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <h4>Vast Contact</h4>
+                    <p>Altijd één vast aanspreekpunt binnen ons team voor al uw vragen.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="social-proof" id="reviews">
+        <div class="container">
+            <h2 class="section-title">Resultaten & Ervaringen</h2>
+            <p class="section-subtitle">Bekijk ons werk en lees wat onze klanten zeggen.</p>
+
+            <div class="testimonial">
+                <i class="fa-solid fa-quote-left"></i>
+                <p>"PureClean heeft onze gevel en oprit er weer als nieuw uit laten zien! De communicatie was super helder en de jongens werkten ontzettend netjes."</p>
+                <strong>— Familie de Vries, Particuliere klant</strong>
+            </div>
+
+            <div class="insta-grid">
+                <div class="insta-post"><i class="fa-brands fa-instagram"></i></div>
+                <div class="insta-post"><i class="fa-brands fa-instagram"></i></div>
+                <div class="insta-post"><i class="fa-brands fa-instagram"></i></div>
+                <div class="insta-post"><i class="fa-brands fa-instagram"></i></div>
+            </div>
+            <p style="text-align: center; margin-top: 20px;">
+                <a href="#" style="color: var(--primary-teal); font-weight: 600;"><i class="fa-brands fa-instagram"></i> Volg ons op Instagram voor meer voor/na beelden!</a>
+            </p>
+        </div>
+    </section>
+
+    <section id="offerte">
+        <div class="container">
+            <h2 class="section-title">Offerte Aanvragen</h2>
+            <p class="section-subtitle">Wacht niet te lang! Vul het formulier in en ontvang snel een prijsopgave op maat.</p>
+
+            <div class="offerte-form-wrapper">
+                <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Bedankt! We nemen snel contact op.');">
+                    <div class="form-group">
+                        <label for="name">Naam of Bedrijfsnaam *</label>
+                        <input type="text" id="name" class="form-control" required placeholder="Bijv. Jan Jansen">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-mailadres *</label>
+                        <input type="email" id="email" class="form-control" required placeholder="uw@email.nl">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Telefoonnummer</label>
+                        <input type="tel" id="phone" class="form-control" placeholder="06 12345678">
+                    </div>
+                    <div class="form-group">
+                        <label for="service">Welke dienst heeft u nodig? *</label>
+                        <select id="service" class="form-control" required>
+                            <option value="">Kies een dienst...</option>
+                            <option value="oprit">Oprit reinigen</option>
+                            <option value="gevel">Gevel reinigen</option>
+                            <option value="terras">Terras reinigen</option>
+                            <option value="tegels">Tegels reinigen</option>
+                            <option value="meerdere">Meerdere diensten / Anders</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="frequency">Gewenste frequentie</label>
+                        <select id="frequency" class="form-control">
+                            <option value="eenmalig">Eenmalige dieptereiniging</option>
+                            <option value="periodiek">Periodiek onderhoud</option>
+                            <option value="maandelijks">Maandelijks</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Extra informatie of vragen</label>
+                        <textarea id="message" class="form-control" placeholder="Beschrijf kort de situatie (bijv. aantal vierkante meters, type vervuiling)..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="photo"><i class="fa-solid fa-camera"></i> Voeg optioneel een foto toe van de situatie</label>
+                        <input type="file" id="photo" class="form-control" accept="image/*">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 1.1rem; padding: 15px;">Verstuur Aanvraag</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-cta">
+                <h2>Klaar voor een frisse start?</h2>
+                <p>Wij maken het weer schoon & stralend! Zoals het hoort.</p>
+                <br>
+                <a href="#offerte" class="btn btn-secondary">Vraag Vandaag Nog Een Offerte Aan</a>
+            </div>
+
+            <div class="footer-content">
+                <div class="logo" style="background: none; -webkit-text-fill-color: var(--pure-white); color: var(--pure-white);">
+                    <i class="fa-solid fa-sparkles"></i> PureClean
+                </div>
+                
+                <div class="social-links">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+
+                <div class="legal-links">
+                    <a href="#">Algemene voorwaarden</a>
+                    <a href="#">Privacyverklaring</a>
+                    <a href="#" id="cookie-settings-link">Cookie-instellingen</a>
+                    <a href="#">Impressum</a>
+                </div>
+            </div>
+            <p style="margin-top: 2rem; font-size: 0.8rem; color: #94a3b8;">&copy; 2026 PureClean Reiniging. Alle rechten voorbehouden.</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/31600000000" class="whatsapp-float" target="_blank" aria-label="Chat with us on WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <div class="cookie-banner" id="cookieBanner">
+        <p>Wij gebruiken cookies om uw ervaring te verbeteren en Instagram content te tonen. Zie onze <a href="#" style="text-decoration: underline;">Privacyverklaring</a>.</p>
+        <div class="cookie-btns">
+            <button class="btn btn-secondary" id="acceptCookies" style="padding: 8px 16px; font-size: 0.9rem;">Toestemmen & tonen</button>
+            <button class="btn" id="rejectCookies" style="background: transparent; border: 1px solid var(--pure-white); padding: 8px 16px; font-size: 0.9rem;">Weigeren</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Cookie Banner Logic
+            const banner = document.getElementById('cookieBanner');
+            const acceptBtn = document.getElementById('acceptCookies');
+            const rejectBtn = document.getElementById('rejectCookies');
+            
+            // Check if user already made a choice
+            if (!localStorage.getItem('cookiesAccepted')) {
+                // Slight delay before showing banner
+                setTimeout(() => {
+                    banner.classList.add('show');
+                }, 1000);
+            }
+
+            const hideBanner = (accepted) => {
+                localStorage.setItem('cookiesAccepted', accepted);
+                banner.classList.remove('show');
+            };
+
+            acceptBtn.addEventListener('click', () => hideBanner(true));
+            rejectBtn.addEventListener('click', () => hideBanner(false));
+            
+            // Trigger cookie settings from footer
+            document.getElementById('cookie-settings-link').addEventListener('click', (e) => {
+                e.preventDefault();
+                banner.classList.add('show');
+            });
+        });
+    </script>
+</body>
+</html>
