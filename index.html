@@ -318,13 +318,18 @@
             border: 4px solid var(--primary-white);
         }
 
-        /* Before/After Slider */
+        /* Before/After Sliders */
+        .sliders-wrapper {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            width: 100%;
+        }
+
         .ba-slider-container {
             position: relative;
             width: 100%;
-            max-width: 600px;
-            height: 300px;
-            margin: 0 auto;
+            height: 350px;
             border-radius: var(--radius-md);
             overflow: hidden;
             box-shadow: var(--shadow-lg);
@@ -369,7 +374,7 @@
             -webkit-appearance: none;
             appearance: none;
             width: 4px;
-            height: 300px;
+            height: 350px;
             background: transparent; 
             cursor: ew-resize;
         }
@@ -586,11 +591,11 @@
             letter-spacing: 0.5px;
         }
 
-        /* Cookie Banner */
+        /* Cookie Banner (Desktop) */
         .cookie-banner {
             position: fixed;
             bottom: 30px;
-            left: 30px;
+            left: 80px; /* Moved a little bit to the right on desktop */
             background: #1e1e1e;
             color: var(--primary-white);
             padding: 12px 12px 12px 25px;
@@ -601,7 +606,7 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             z-index: 1001;
             width: max-content;
-            max-width: calc(100% - 60px);
+            max-width: calc(100% - 100px);
         }
 
         /* --- ANIMATION CLASSES --- */
@@ -672,18 +677,26 @@
                 margin: 12px 0;
             }
 
+            /* Sliders Mobile */
+            .sliders-wrapper { grid-template-columns: 1fr; }
+            .ba-slider-container { height: 250px; }
+            .ba-slider-input::-webkit-slider-thumb { height: 250px; }
+
+            /* Cookie Banner Mobile - Moved more to the left */
             .cookie-banner { 
                 flex-direction: column; 
-                text-align: center; 
+                text-align: left; 
                 gap: 15px; 
                 border-radius: 20px; 
                 padding: 20px; 
-                width: 90%; 
-                left: 50%; 
-                transform: translateX(-50%); 
+                width: 85%; /* Reduced width so it sits more visually on the left */
+                left: 15px; 
+                transform: none; 
             }
-            .ba-slider-container { height: 300px; }
-            .ba-slider-input::-webkit-slider-thumb { height: 300px; }
+            .cookie-banner > div:last-child {
+                width: 100%;
+                justify-content: center;
+            }
             
             /* Mobile footer adjustments */
             .footer-content { flex-direction: column; text-align: center; align-items: center; gap: 30px; }
@@ -725,35 +738,35 @@
 
         <div class="container">
             <div class="section-header reveal">
-                <h2>Welkom bij PureClean [cite: 41]</h2>
-                <p>Bij ons draait alles om netheid, betrouwbaarheid en een frisse omgeving. [cite: 43] Of het nu gaat om opritten, gevels, terrassen of uw tegels rond uw huis. [cite: 44] Wij zorgen voor een stralend resultaat tot in de kleinste hoekjes. [cite: 45]</p>
+                <h2>Welkom bij PureClean</h2>
+                <p>Bij ons draait alles om netheid, betrouwbaarheid en een frisse omgeving. Of het nu gaat om opritten, gevels, terrassen of uw tegels rond uw huis. Wij zorgen voor een stralend resultaat tot in de kleinste hoekjes.</p>
             </div>
 
             <div class="section-header reveal" style="margin-top: 80px;">
-                <h2>Waar wij voor staan! [cite: 50]</h2>
-                <p>Wij geloven erin dat schoon meer is dan alleen netjes. [cite: 51] Het gaat om een frisse start, een verzorgde uitstraling en een gezonde omgeving - thuis en op het werk. [cite: 52]</p>
+                <h2>Waar wij voor staan!</h2>
+                <p>Wij geloven erin dat schoon meer is dan alleen netjes. Het gaat om een frisse start, een verzorgde uitstraling en een gezonde omgeving - thuis en op het werk.</p>
             </div>
             
             <div class="values-grid">
                 <div class="card reveal delay-1">
                     <div class="icon-wrapper"><i class="fas fa-handshake"></i></div>
                     <h4>Betrouwbaarheid</h4>
-                    <p>Afspraken zijn er om na te komen. U kunt op ons rekenen. [cite: 54]</p>
+                    <p>Afspraken zijn er om na te komen. U kunt op ons rekenen.</p>
                 </div>
                 <div class="card reveal delay-2">
                     <div class="icon-wrapper"><i class="fas fa-star"></i></div>
                     <h4>Kwaliteit</h4>
-                    <p>We leveren consequent hoogwaardig werk, met zorg en precisie. [cite: 55]</p>
+                    <p>We leveren consequent hoogwaardig werk, met zorg en precisie.</p>
                 </div>
                 <div class="card reveal delay-3">
                     <div class="icon-wrapper"><i class="fas fa-exchange-alt"></i></div>
                     <h4>Flexibiliteit</h4>
-                    <p>Ieder pand is anders. [cite: 55] Daarom bieden we maatwerk, afgestemd op uw wensen. [cite: 56]</p>
+                    <p>Ieder pand is anders. Daarom bieden we maatwerk, afgestemd op uw wensen.</p>
                 </div>
                 <div class="card reveal delay-4">
                     <div class="icon-wrapper"><i class="fas fa-leaf"></i></div>
                     <h4>Duurzaamheid</h4>
-                    <p>We kiezen waar mogelijk voor milieuvriendelijke producten en methodes. [cite: 57]</p>
+                    <p>We kiezen waar mogelijk voor milieuvriendelijke producten en methodes.</p>
                 </div>
             </div>
 
@@ -762,71 +775,86 @@
                 <p>Schuif de balk heen en weer om met eigen ogen het verschil te zien voor en na onze dieptereiniging.</p>
             </div>
 
-            <div class="ba-slider-container reveal">
-                <div class="ba-img-background">
-                    <img src="na.jpg" alt="Na reiniging">
+            <div class="sliders-wrapper">
+                <div class="ba-slider-container reveal">
+                    <div class="ba-img-background">
+                        <img src="na.jpg" alt="Na reiniging">
+                    </div>
+                    <div class="ba-img-foreground img-before">
+                        <img src="voor.jpg" alt="Voor reiniging">
+                    </div>
+                    <input type="range" min="0" max="100" value="50" class="ba-slider-input">
+                    <div class="ba-slider-button" style="left: 50%;">
+                        <i class="fas fa-code"></i>
+                    </div>
                 </div>
-                <div class="ba-img-foreground img-before" id="ba-foreground">
-                    <img src="voor.jpg" alt="Voor reiniging">
-                </div>
-                <input type="range" min="0" max="100" value="50" class="ba-slider-input" id="ba-slider">
-                <div class="ba-slider-button" id="ba-slider-line" style="left: 50%;">
-                    <i class="fas fa-code"></i>
+
+                <div class="ba-slider-container reveal delay-1">
+                    <div class="ba-img-background">
+                        <img src="na-serre.jpg" alt="Na reiniging Serre">
+                    </div>
+                    <div class="ba-img-foreground img-before">
+                        <img src="Voor-serre.jpg" alt="Voor reiniging Serre">
+                    </div>
+                    <input type="range" min="0" max="100" value="50" class="ba-slider-input">
+                    <div class="ba-slider-button" style="left: 50%;">
+                        <i class="fas fa-code"></i>
+                    </div>
                 </div>
             </div>
 
             <div class="section-header reveal" style="margin-top: 100px;">
-                <h2>Hoe wij te werk gaan [cite: 63]</h2>
-                <p>Bij PureClean werken we volgens een gestructureerde en transparante aanpak. [cite: 64] Zo weet u altijd waar u aan toe bent. [cite: 65]</p>
+                <h2>Hoe wij te werk gaan</h2>
+                <p>Bij PureClean werken we volgens een gestructureerde en transparante aanpak. Zo weet u altijd waar u aan toe bent.</p>
             </div>
             
             <div class="timeline">
                 <div class="timeline-step reveal">
                     <div class="timeline-content">
-                        <h4>1. Kennismaking [cite: 66]</h4>
-                        <p>We starten met een persoonlijk gesprek en een grondige inventarisatie van uw wensen en de locatie. [cite: 68, 69]</p>
+                        <h4>1. Kennismaking</h4>
+                        <p>We starten met een persoonlijk gesprek en een grondige inventarisatie van uw wensen en de locatie.</p>
                     </div>
                 </div>
                 <div class="timeline-step reveal">
                     <div class="timeline-content">
-                        <h4>2. Op maat gemaakte offerte [cite: 70]</h4>
-                        <p>U ontvangt van ons een duidelijke offerte, zonder verrassingen achteraf. [cite: 71]</p>
+                        <h4>2. Op maat gemaakte offerte</h4>
+                        <p>U ontvangt van ons een duidelijke offerte, zonder verrassingen achteraf.</p>
                     </div>
                 </div>
                 <div class="timeline-step reveal">
                     <div class="timeline-content">
-                        <h4>3. Professionele uitvoering [cite: 72]</h4>
-                        <p>Onze ervaren schoonmakers gaan efficiënt, zorgvuldig en met oog voor detail aan de slag. [cite: 73]</p>
+                        <h4>3. Professionele uitvoering</h4>
+                        <p>Onze ervaren schoonmakers gaan efficiënt, zorgvuldig en met oog voor detail aan de slag.</p>
                     </div>
                 </div>
                 <div class="timeline-step reveal">
                     <div class="timeline-content">
-                        <h4>4. Controle & bijsturing [cite: 75]</h4>
-                        <p>We evalueren regelmatig het resultaat. Uw tevredenheid staat centraal. [cite: 76]</p>
+                        <h4>4. Controle & bijsturing</h4>
+                        <p>We evalueren regelmatig het resultaat. Uw tevredenheid staat centraal.</p>
                     </div>
                 </div>
             </div>
 
             <div id="home-contact-section" class="section-header reveal" style="margin-top: 100px; padding-top: 60px;">
-                <h2>Contact [cite: 144]</h2>
-                <p>Heeft u vragen, wilt u meer informatie of direct een vrijblijvende offerte aanvragen? Neem gerust contact met ons op - we staan voor u klaar! [cite: 145, 146] Bij PureClean houden we van korte lijnen en duidelijke communicatie. [cite: 147]</p>
+                <h2>Contact</h2>
+                <p>Heeft u vragen, wilt u meer informatie of direct een vrijblijvende offerte aanvragen? Neem gerust contact met ons op - we staan voor u klaar! Bij PureClean houden we van korte lijnen en duidelijke communicatie.</p>
             </div>
             
             <div class="contact-grid">
                 <a href="tel:0644310456" class="card reveal delay-1" style="text-align: center; display: block; text-decoration: none; color: inherit;">
                     <div class="icon-wrapper" style="margin: 0 auto 20px;"><i class="fas fa-phone"></i></div>
                     <h3>Bel Ons</h3>
-                    <p style="font-size: 1.2rem; color: var(--text-dark); font-weight: 500;">06-44310456 [cite: 150]</p>
+                    <p style="font-size: 1.2rem; color: var(--text-dark); font-weight: 500;">06-44310456</p>
                 </a>
                 <a href="mailto:purecleanreiniging@gmail.com" class="card reveal delay-2" style="text-align: center; display: block; text-decoration: none; color: inherit;">
                     <div class="icon-wrapper" style="margin: 0 auto 20px;"><i class="fas fa-envelope"></i></div>
                     <h3>E-mail</h3>
-                    <p style="font-size: 1.1rem; color: var(--text-dark); font-weight: 500;">purecleanreiniging@gmail.com [cite: 151]</p>
+                    <p style="font-size: 1.1rem; color: var(--text-dark); font-weight: 500;">purecleanreiniging@gmail.com</p>
                 </a>
                 <div class="card reveal delay-3" style="text-align: center;">
                     <div class="icon-wrapper" style="margin: 0 auto 20px;"><i class="fas fa-map-marker-alt"></i></div>
                     <h3>Werkgebied</h3>
-                    <p style="font-size: 1.1rem; color: var(--text-dark); font-weight: 500;">Zuid-Holland & Zeeland [cite: 152]</p>
+                    <p style="font-size: 1.1rem; color: var(--text-dark); font-weight: 500;">Zuid-Holland & Zeeland</p>
                 </div>
             </div>
         </div>
@@ -835,41 +863,41 @@
     <div id="diensten" class="page-section">
         <div class="container">
             <div class="section-header reveal">
-                <h2>Onze diensten [cite: 40]</h2>
-                <p>Of het nu gaat om maandelijkse schoonmaak, periodiek onderhoud of een eenmalige dieptereiniging - wij staan klaar om het werk uit handen te nemen. [cite: 59]</p>
+                <h2>Onze diensten</h2>
+                <p>Of het nu gaat om maandelijkse schoonmaak, periodiek onderhoud of een eenmalige dieptereiniging - wij staan klaar om het werk uit handen te nemen.</p>
             </div>
             
             <div class="services-grid">
                 <div class="card service-card reveal delay-1">
                     <img src="Gemini_Generated_Image_tn9jf0tn9jf0tn9j.jpg" alt="Oprit reiniging" class="card-img">
                     <div class="icon-wrapper"><i class="fas fa-road"></i></div>
-                    <h3>Oprit reiniging [cite: 253]</h3>
-                    <p>Een schone en verzorgde oprit is het visitekaartje van uw woning of bedrijfspand. [cite: 254] Wij zorgen ervoor dat uw oprit er weer als nieuw uitziet-vrij van groene aanslag, vuil, olie- en bandensporen. [cite: 255]</p>
-                    <p style="color: var(--teal); font-weight: 500; font-size: 0.9rem;">Vanaf €3,50 per m² [cite: 258]</p>
+                    <h3>Oprit reiniging</h3>
+                    <p>Een schone en verzorgde oprit is het visitekaartje van uw woning of bedrijfspand. Wij zorgen ervoor dat uw oprit er weer als nieuw uitziet-vrij van groene aanslag, vuil, olie- en bandensporen.</p>
+                    <p style="color: var(--teal); font-weight: 500; font-size: 0.9rem;">Vanaf €3,50 per m²</p>
                 </div>
                 
                 <div class="card service-card reveal delay-2">
                     <img src="Gemini_Generated_Image_6ez2sk6ez2sk6ez2.jpg" alt="Terras reiniging" class="card-img">
                     <div class="icon-wrapper"><i class="fas fa-layer-group"></i></div>
-                    <h3>Terras reiniging [cite: 259]</h3>
-                    <p>Genieten van een schoon en fris terras? Wij zorgen ervoor dat uw terras er weer piekfijn uitziet. [cite: 260] Vuil, mos, groene aanslag of verkleuring? Wij pakken het grondig en veilig aan. [cite: 261]</p>
-                    <p style="color: var(--teal); font-weight: 500; font-size: 0.9rem;">Vanaf €3,50 per m² [cite: 264]</p>
+                    <h3>Terras reiniging</h3>
+                    <p>Genieten van een schoon en fris terras? Wij zorgen ervoor dat uw terras er weer piekfijn uitziet. Vuil, mos, groene aanslag of verkleuring? Wij pakken het grondig en veilig aan.</p>
+                    <p style="color: var(--teal); font-weight: 500; font-size: 0.9rem;">Vanaf €3,50 per m²</p>
                 </div>
                 
                 <div class="card service-card reveal delay-3">
                     <img src="Gemini_Generated_Image_kxpwo3kxpwo3kxpw.jpg" alt="Gevel reiniging" class="card-img">
                     <div class="icon-wrapper"><i class="fas fa-building"></i></div>
-                    <h3>Gevel reiniging [cite: 268]</h3>
-                    <p>Een schone gevel beschermt de waarde van uw pand. [cite: 269] Wij zijn gespecialiseerd in professionele gevelreiniging, zodat uw woning er weer fris, representatief en verzorgd uitziet. [cite: 270]</p>
-                    <p style="color: var(--teal); font-weight: 500; font-size: 0.9rem;">Vanaf €3,50 per m² [cite: 273]</p>
+                    <h3>Gevel reiniging</h3>
+                    <p>Een schone gevel beschermt de waarde van uw pand. Wij zijn gespecialiseerd in professionele gevelreiniging, zodat uw woning er weer fris, representatief en verzorgd uitziet.</p>
+                    <p style="color: var(--teal); font-weight: 500; font-size: 0.9rem;">Vanaf €3,50 per m²</p>
                 </div>
                 
                 <div class="card service-card reveal delay-4">
                     <img src="Gemini_Generated_Image_yedamiyedamiyeda.jpg" alt="Glas reiniging" class="card-img">
                     <div class="icon-wrapper"><i class="fas fa-home"></i></div>
-                    <h3>Glas reiniging [cite: 274]</h3>
-                    <p>Een schone overkapping of serre zorgt voor een helder uitzicht. [cite: 275] Wij zorgen voor een grondige reiniging, van het verwijderen van vuil tot het laten glanzen van het glas met veilige technieken. [cite: 276, 277]</p>
-                    <p style="color: var(--teal); font-weight: 500; font-size: 0.9rem;">Vanaf €3,50 per m² [cite: 278]</p>
+                    <h3>Glas reiniging</h3>
+                    <p>Een schone overkapping of serre zorgt voor een helder uitzicht. Wij zorgen voor een grondige reiniging, van het verwijderen van vuil tot het laten glanzen van het glas met veilige technieken.</p>
+                    <p style="color: var(--teal); font-weight: 500; font-size: 0.9rem;">Vanaf €3,50 per m²</p>
                 </div>
             </div>
         </div>
@@ -879,68 +907,68 @@
         <div class="container">
             <div class="section-header reveal">
                 <h2>Vrijblijvende Offerte</h2>
-                <p>Vraag hier binnen enkele minuten vrijblijvend een offerte aan. [cite: 241] Een offerte op maat, afgestemd op uw behoeften met duidelijke prijzen zonder verborgen kosten. [cite: 237, 238]</p>
+                <p>Vraag hier binnen enkele minuten vrijblijvend een offerte aan. Een offerte op maat, afgestemd op uw behoeften met duidelijke prijzen zonder verborgen kosten.</p>
             </div>
             
             <div class="form-container reveal delay-1">
                 <form action="mailto:purecleanreiniging@gmail.com" method="POST" enctype="text/plain">
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                         <div class="form-group">
-                            <label>Naam * [cite: 5]</label>
+                            <label>Naam *</label>
                             <input type="text" class="form-control" name="naam" required>
                         </div>
                         <div class="form-group">
-                            <label>E-mail * [cite: 7]</label>
+                            <label>E-mail *</label>
                             <input type="email" class="form-control" name="email" required>
                         </div>
                     </div>
                     
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                         <div class="form-group">
-                            <label>Telefoonnummer * [cite: 8]</label>
+                            <label>Telefoonnummer *</label>
                             <input type="tel" class="form-control" name="telefoon" placeholder="+31 12345678" required>
                         </div>
                         <div class="form-group">
-                            <label>Aantal m2 (ongeveer) [cite: 26]</label>
+                            <label>Aantal m2 (ongeveer)</label>
                             <input type="number" class="form-control" name="m2">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label>Adres * [cite: 13]</label>
+                        <label>Adres *</label>
                         <input type="text" class="form-control" name="adres" required>
                     </div>
                     
                     <div class="form-group">
-                        <label>Selecteer werkzaamheden: [cite: 17]</label>
+                        <label>Selecteer werkzaamheden:</label>
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
                             <label class="checkbox-group">
-                                <input type="checkbox" name="werk" value="Oprit"> Oprit reiniging [cite: 20]
+                                <input type="checkbox" name="werk" value="Oprit"> Oprit reiniging
                             </label>
                             <label class="checkbox-group">
-                                <input type="checkbox" name="werk" value="Terras"> Terras reiniging [cite: 21]
+                                <input type="checkbox" name="werk" value="Terras"> Terras reiniging
                             </label>
                             <label class="checkbox-group">
-                                <input type="checkbox" name="werk" value="Gevel"> Gevel reiniging [cite: 23]
+                                <input type="checkbox" name="werk" value="Gevel"> Gevel reiniging
                             </label>
                             <label class="checkbox-group">
-                                <input type="checkbox" name="werk" value="Overige"> Overige werkzaamheden [cite: 24]
+                                <input type="checkbox" name="werk" value="Overige"> Overige werkzaamheden
                             </label>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label>Foto van de huidige situatie toevoegen: [cite: 27]</label>
+                        <label>Foto van de huidige situatie toevoegen:</label>
                         <input type="file" class="form-control" name="foto" style="padding: 10px;">
                     </div>
 
                     <div class="form-group">
-                        <label>Eventuele opmerkingen of vragen: [cite: 30]</label>
+                        <label>Eventuele opmerkingen of vragen:</label>
                         <textarea class="form-control" name="opmerkingen" rows="4"></textarea>
                     </div>
 
                     <div style="text-align: center; margin-top: 30px;">
-                        <button type="submit" class="btn" style="width: 100%; max-width: 300px;">Offerte aanvragen [cite: 31]</button>
+                        <button type="submit" class="btn" style="width: 100%; max-width: 300px;">Offerte aanvragen</button>
                     </div>
                 </form>
             </div>
@@ -950,20 +978,20 @@
     <div id="legal" class="page-section">
         <div class="container" style="max-width: 800px; background: var(--primary-white); padding: 50px; border-radius: 12px; margin-bottom: 50px;">
             <div class="reveal">
-                <h2 id="voorwaarden">Algemene Voorwaarden - PureClean [cite: 107, 108]</h2>
-                <p>Deze algemene voorwaarden zijn van toepassing op alle offertes, diensten, overeenkomsten en leveringen van PureClean, tenzij uitdrukkelijk schriftelijk anders is overeengekomen. [cite: 111, 112]</p>
-                <p><strong>Aansprakelijkheid:</strong> PureClean is niet aansprakelijk voor schade die ontstaat door het opvolgen van onjuiste of onvolledige informatie van de klant. [cite: 123] De aansprakelijkheid is in alle gevallen beperkt tot het bedrag van de betreffende factuur. [cite: 124]</p>
+                <h2 id="voorwaarden">Algemene Voorwaarden - PureClean</h2>
+                <p>Deze algemene voorwaarden zijn van toepassing op alle offertes, diensten, overeenkomsten en leveringen van PureClean, tenzij uitdrukkelijk schriftelijk anders is overeengekomen.</p>
+                <p><strong>Aansprakelijkheid:</strong> PureClean is niet aansprakelijk voor schade die ontstaat door het opvolgen van onjuiste of onvolledige informatie van de klant. De aansprakelijkheid is in alle gevallen beperkt tot het bedrag van de betreffende factuur.</p>
                 <hr style="margin: 40px 0; border: 0; border-top: 1px solid #EEE;">
                 
-                <h2 id="privacy">Privacyverklaring [cite: 297]</h2>
-                <p>Bij PureClean hechten we veel waarde aan uw privacy. [cite: 298] We gaan zorgvuldig om met uw persoonsgegevens en zorgen ervoor dat deze goed beveiligd zijn. [cite: 298] Wij gebruiken uw gegevens uitsluitend voor het beantwoorden van uw vragen en het opstellen van offertes. [cite: 307, 308, 309]</p>
+                <h2 id="privacy">Privacyverklaring</h2>
+                <p>Bij PureClean hechten we veel waarde aan uw privacy. We gaan zorgvuldig om met uw persoonsgegevens en zorgen ervoor dat deze goed beveiligd zijn. Wij gebruiken uw gegevens uitsluitend voor het beantwoorden van uw vragen en het opstellen van offertes.</p>
                 <hr style="margin: 40px 0; border: 0; border-top: 1px solid #EEE;">
 
-                <h2 id="impressum">Impressum [cite: 200]</h2>
+                <h2 id="impressum">Impressum</h2>
                 <p><strong>PureClean</strong><br>
-                Steenkreek 6, 3253EG Ouddorp, Nederland [cite: 202, 203, 204]<br>
-                KVK-nummer: 96990570 | BTW-nummer: NL867864230801 [cite: 215, 216]<br>
-                Vertegenwoordigd door: Mathijs Molendijk & Jay Sosemito [cite: 217, 218]</p>
+                Steenkreek 6, 3253EG Ouddorp, Nederland<br>
+                KVK-nummer: 96990570 | BTW-nummer: NL867864230801<br>
+                Vertegenwoordigd door: Mathijs Molendijk & Jay Sosemito</p>
             </div>
         </div>
     </div>
@@ -973,14 +1001,14 @@
             <div class="footer-content">
                 <div class="footer-col">
                     <div class="footer-logo" onclick="showPage('home')">PureClean</div>
-                    <h3 style="margin-bottom: 15px; color: #2A7B7E;">Schoon begint met een goed gesprek! [cite: 241, 242]</h3>
-                    <p style="max-width: 300px; margin: 0; color: #8A8A8A; font-size: 1.05rem;">Wacht niet te lang! Vraag vandaag nog een offerte aan en ontdek wat wij voor u kunnen betekenen. [cite: 79]</p>
+                    <h3 style="margin-bottom: 15px; color: #2A7B7E;">Schoon begint met een goed gesprek!</h3>
+                    <p style="max-width: 300px; margin: 0; color: #8A8A8A; font-size: 1.05rem;">Wacht niet te lang! Vraag vandaag nog een offerte aan en ontdek wat wij voor u kunnen betekenen.</p>
                 </div>
                 
                 <div class="footer-col">
                     <h4>Handige Links</h4>
                     <div class="footer-links-col">
-                        <a onclick="showPage('legal'); setTimeout(() => document.getElementById('voorwaarden').scrollIntoView(), 100);" style="cursor: pointer;">Algemene voorwaarden [cite: 142]</a>
+                        <a onclick="showPage('legal'); setTimeout(() => document.getElementById('voorwaarden').scrollIntoView(), 100);" style="cursor: pointer;">Algemene voorwaarden</a>
                         <a onclick="showPage('legal'); setTimeout(() => document.getElementById('privacy').scrollIntoView(), 100);" style="cursor: pointer;">Privacyverklaring</a>
                         <a onclick="showPage('legal'); setTimeout(() => document.getElementById('impressum').scrollIntoView(), 100);" style="cursor: pointer;">Impressum</a>
                     </div>
@@ -1060,19 +1088,23 @@
             }, 1000);
 
             // --- Before & After Slider Functionaliteit ---
-            const slider = document.getElementById('ba-slider');
-            const beforeImg = document.querySelector('.img-before');
-            const sliderLine = document.getElementById('ba-slider-line');
+            const sliderContainers = document.querySelectorAll('.ba-slider-container');
+            
+            sliderContainers.forEach(container => {
+                const slider = container.querySelector('.ba-slider-input');
+                const beforeImg = container.querySelector('.img-before');
+                const sliderLine = container.querySelector('.ba-slider-button');
 
-            if(slider && beforeImg && sliderLine) {
-                slider.addEventListener('input', (e) => {
-                    const sliderValue = e.target.value;
-                    // Clip de bovenste (voor) foto op basis van de slider
-                    beforeImg.style.clipPath = `polygon(0 0, ${sliderValue}% 0, ${sliderValue}% 100%, 0 100%)`;
-                    // Verplaats de witte lijn met het knopje
-                    sliderLine.style.left = `${sliderValue}%`;
-                });
-            }
+                if(slider && beforeImg && sliderLine) {
+                    slider.addEventListener('input', (e) => {
+                        const sliderValue = e.target.value;
+                        // Clip de bovenste (voor) foto op basis van de slider
+                        beforeImg.style.clipPath = `polygon(0 0, ${sliderValue}% 0, ${sliderValue}% 100%, 0 100%)`;
+                        // Verplaats de witte lijn met het knopje
+                        sliderLine.style.left = `${sliderValue}%`;
+                    });
+                }
+            });
         });
     </script>
 </body>
