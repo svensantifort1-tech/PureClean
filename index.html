@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StralendSchoon</title>
+    <title>PureClean</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Poppins:wght@500;600;700;800;900&display=swap" rel="stylesheet">
     
@@ -715,10 +715,8 @@
             <ul id="nav-menu">
                 <li><a onclick="showPage('home')">Home</a></li>
                 <li><a onclick="showPage('diensten')">Onze diensten</a></li>
-                <li><a onclick="showPage('offertes')">Offertes</a></li>
             </ul>
         </nav>
-        <button class="btn" onclick="showPage('offertes')" style="padding: 10px 24px; font-size: 0.9rem;">Offerte aanvragen</button>
         <div class="hamburger" onclick="toggleMenu()">
             <i class="fas fa-bars"></i>
         </div>
@@ -731,7 +729,6 @@
                 <p>Schoon & Stralend, Zoals het hoort.</p>
                 <div class="hero-buttons">
                     <button class="btn" onclick="showPage('diensten')">Ontdek onze diensten</button>
-                    <button class="btn btn-outline" onclick="showPage('offertes')">Direct offerte</button>
                 </div>
             </div>
         </div>
@@ -837,7 +834,7 @@
 
             <div id="home-contact-section" class="section-header reveal" style="margin-top: 100px; padding-top: 60px;">
                 <h2>Contact</h2>
-                <p>Heeft u vragen, wilt u meer informatie of direct een vrijblijvende offerte aanvragen? Neem gerust contact met ons op - we staan voor u klaar! Bij StralendSchoon houden we van korte lijnen en duidelijke communicatie.</p>
+                <p>Heeft u vragen of wilt u meer informatie? Neem gerust contact met ons op - we staan voor u klaar! Bij StralendSchoon houden we van korte lijnen en duidelijke communicatie.</p>
             </div>
             
             <div class="contact-grid">
@@ -903,78 +900,6 @@
         </div>
     </div>
 
-    <div id="offertes" class="page-section">
-        <div class="container">
-            <div class="section-header reveal">
-                <h2>Vrijblijvende Offerte</h2>
-                <p>Vraag hier binnen enkele minuten vrijblijvend een offerte aan. Een offerte op maat, afgestemd op uw behoeften met duidelijke prijzen zonder verborgen kosten.</p>
-            </div>
-            
-            <div class="form-container reveal delay-1">
-                <form onsubmit="alert('Dit is een voorbeeld website. Aanvragen kunnen niet worden verzonden.'); return false;">
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                        <div class="form-group">
-                            <label>Naam *</label>
-                            <input type="text" class="form-control" name="naam" required>
-                        </div>
-                        <div class="form-group">
-                            <label>E-mail *</label>
-                            <input type="email" class="form-control" name="email" required>
-                        </div>
-                    </div>
-                    
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                        <div class="form-group">
-                            <label>Telefoonnummer *</label>
-                            <input type="tel" class="form-control" name="telefoon" placeholder="+31 12345678" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Aantal m2 (ongeveer)</label>
-                            <input type="number" class="form-control" name="m2">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Adres *</label>
-                        <input type="text" class="form-control" name="adres" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Selecteer werkzaamheden:</label>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                            <label class="checkbox-group">
-                                <input type="checkbox" name="werk" value="Oprit"> Oprit reiniging
-                            </label>
-                            <label class="checkbox-group">
-                                <input type="checkbox" name="werk" value="Terras"> Terras reiniging
-                            </label>
-                            <label class="checkbox-group">
-                                <input type="checkbox" name="werk" value="Gevel"> Gevel reiniging
-                            </label>
-                            <label class="checkbox-group">
-                                <input type="checkbox" name="werk" value="Overige"> Overige werkzaamheden
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Foto van de huidige situatie toevoegen:</label>
-                        <input type="file" class="form-control" name="foto" style="padding: 10px;">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Eventuele opmerkingen of vragen:</label>
-                        <textarea class="form-control" name="opmerkingen" rows="4"></textarea>
-                    </div>
-
-                    <div style="text-align: center; margin-top: 30px;">
-                        <button type="submit" class="btn" style="width: 100%; max-width: 300px;">Offerte aanvragen</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
     <div id="legal" class="page-section">
         <div class="container" style="max-width: 800px; background: var(--primary-white); padding: 50px; border-radius: 12px; margin-bottom: 50px;">
             <div class="reveal">
@@ -989,9 +914,9 @@
 
                 <h2 id="impressum">Impressum</h2>
                 <p><strong>StralendSchoon</strong><br>
-                Steenkreek 6, 3253EG Ouddorp, Nederland<br>
-                KVK-nummer: 96990570 | BTW-nummer: NL867864230801<br>
-                Vertegenwoordigd door: Mathijs Molendijk & Jay Sosemito</p>
+                Voorbeeldstraat 123, 1234 AB Voorbeeldstad, Nederland<br>
+                KVK-nummer: 12345678 | BTW-nummer: NL123456789B01<br>
+                Vertegenwoordigd door: Voorbeeld Naam 1 & Voorbeeld Naam 2</p>
             </div>
         </div>
     </div>
@@ -1002,7 +927,7 @@
                 <div class="footer-col">
                     <div class="footer-logo" onclick="showPage('home')">StralendSchoon</div>
                     <h3 style="margin-bottom: 15px; color: #2A7B7E;">Schoon begint met een goed gesprek!</h3>
-                    <p style="max-width: 300px; margin: 0; color: #8A8A8A; font-size: 1.05rem;">Wacht niet te lang! Vraag vandaag nog een offerte aan en ontdek wat wij voor u kunnen betekenen.</p>
+                    <p style="max-width: 300px; margin: 0; color: #8A8A8A; font-size: 1.05rem;">Wacht niet te lang! Neem vandaag nog contact op en ontdek wat wij voor u kunnen betekenen.</p>
                 </div>
                 
                 <div class="footer-col">
