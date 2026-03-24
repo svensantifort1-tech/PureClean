@@ -595,7 +595,7 @@
         .cookie-banner {
             position: fixed;
             bottom: 30px;
-            left: 80px; /* Moved a little bit to the right on desktop */
+            left: 80px;
             background: #1e1e1e;
             color: var(--primary-white);
             padding: 12px 12px 12px 25px;
@@ -682,14 +682,14 @@
             .ba-slider-container { height: 250px; }
             .ba-slider-input::-webkit-slider-thumb { height: 250px; }
 
-            /* Cookie Banner Mobile - Moved more to the left */
+            /* Cookie Banner Mobile */
             .cookie-banner { 
                 flex-direction: column; 
                 text-align: left; 
                 gap: 15px; 
                 border-radius: 20px; 
                 padding: 20px; 
-                width: 85%; /* Reduced width so it sits more visually on the left */
+                width: 85%; 
                 left: 15px; 
                 transform: none; 
             }
@@ -911,7 +911,12 @@
             </div>
             
             <div class="form-container reveal delay-1">
-                <form action="mailto:purecleanreiniging@gmail.com" method="POST" enctype="text/plain">
+                <form action="https://formsubmit.co/purecleanreiniging@gmail.com" method="POST">
+                    
+                    <input type="hidden" name="_next" value="https://jouwdomein.nl/#bedankt">
+                    <input type="hidden" name="_subject" value="Nieuwe offerte aanvraag PureClean!">
+                    <input type="hidden" name="_captcha" value="false">
+
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                         <div class="form-group">
                             <label>Naam *</label>
@@ -971,6 +976,17 @@
                         <button type="submit" class="btn" style="width: 100%; max-width: 300px;">Offerte aanvragen</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="bedankt" class="page-section">
+        <div class="container" style="text-align: center; max-width: 600px; padding-top: 100px; padding-bottom: 100px;">
+            <div class="reveal">
+                <i class="fas fa-check-circle" style="font-size: 5rem; color: var(--teal-light); margin-bottom: 30px;"></i>
+                <h2>Bedankt! Uw aanvraag is ingediend.</h2>
+                <p style="font-size: 1.1rem; margin-bottom: 40px;">We hebben uw gegevens in goede orde ontvangen. We nemen zo snel mogelijk contact met u op om de mogelijkheden te bespreken.</p>
+                <button class="btn" onclick="showPage('home')">Terug naar Home</button>
             </div>
         </div>
     </div>
@@ -1065,6 +1081,11 @@
         }
 
         window.addEventListener('DOMContentLoaded', () => {
+            // Controleer of de gebruiker op de bedankt pagina uitkomt
+            if(window.location.hash === '#bedankt') {
+                showPage('bedankt');
+            }
+
             const observerOptions = {
                 root: null,
                 rootMargin: '0px',
